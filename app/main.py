@@ -2,17 +2,16 @@ from flask import render_template, redirect, url_for, Blueprint, request, sessio
 
 
 login_blueprint = Blueprint("login", __name__)
-password_blueprint = Blueprint("password", __name__)
 dashboard_blueprint = Blueprint("dashboard", __name__)
 logout_blueprint = Blueprint("logout", __name__)
 
 
-@login_blueprint.route('/login', methods=['POST', 'GET'])
+@login_blueprint.route('/', methods=["POST", "GET"])
 def login():
     if request.method == "POST":
-        session.update({"nick": request.form['nickname']})
+        session.update({"nick" : request.form['nickname']})
     elif request.method == "GET" and "nick" not in session:
-        return render_template("login.html")
+        return render_template('login.html')
 
     return redirect(url_for("dashboard.dashboard"))
 
